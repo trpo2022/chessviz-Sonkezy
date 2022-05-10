@@ -11,29 +11,37 @@ int main()
     int MoveNum = 0;
     Create(board);
     Show(board);
-    // freopen("input.txt","r",stdin);
-    int n = 0;
+    //freopen("input.txt","r",stdin);
+    int n=0;
     char w[7];
     char b[7];
-    while (n == MoveNum) {
+    while(n==MoveNum){
         MoveNum += 1;
-        scanf("%d. ", &n);
-        if (MoveNum == n) {
-            scanf("%s", w);
-            if (WinW(board, w, n)) {
+        scanf("%d. ",&n);
+        if(MoveNum==n){
+            scanf("%s",w);
+            if(WinW(board,w,n)){
                 break;
             }
-            scanf("%s", b);
-            if (WinB(board, w, b, n)) {
+            scanf("%s",b);
+            if(WinB(board,w,b,n)){
                 break;
             }
-            printf("\n%d. %s %s \n", n, w, b);
-            White(board, w);
-            w_pass = 0;
-            Black(board, b);
-            b_pass = 0;
-        } else {
-            Error();
+            printf("\n%d. %s %s \n",n,w,b);
+            White(board,w);
+            if(CheckW(board)){
+                ErrorC(2);
+                break;
+            }
+            w_pass=0;
+            Black(board,b);
+            if(CheckB(board)){
+                ErrorC(2);
+                break;
+            }
+            b_pass=0;
+        }else{
+            ErrorC(1);
             break;
         }
     }
