@@ -29,11 +29,19 @@ int main()
             }
             printf("\n%d. %s %s \n", n, w, b);
             White(board, w);
+            if (CheckW(board)) {
+                ErrorC(2);
+                break;
+            }
             w_pass = 0;
             Black(board, b);
+            if (CheckB(board)) {
+                ErrorC(2);
+                break;
+            }
             b_pass = 0;
         } else {
-            Error();
+            ErrorC(1);
             break;
         }
     }
