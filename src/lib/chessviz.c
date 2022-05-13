@@ -4,6 +4,12 @@ extern int w_pass; // En passant for White
 extern int w_x;    // Pawn possition for en passant
 extern int b_pass; // En passant for Black
 extern int b_x;    // Pawn possition for en passant
+extern int wk_move; //Number of white king move for roque
+extern int bk_move; //Number of black king move for roque
+extern int wra_move; //Number of white left rook move for roque
+extern int bra_move; //Number of black left rook move for roque
+extern int wrh_move; //Number of white right rook move for roque
+extern int brh_move; //Number of black right rook move for roque
 
 char white_piece[6] = {'Q','K','B','N','R','P'};
 char black_piece[6] = {'q','k','b','n','r','p'};
@@ -480,6 +486,7 @@ void WhiteKing(char board[8][8], char w[7])
         board[y1][x1] = ' ';
         board[y2][x2] = 'K';
         Show(board);
+        wk_move++;
     } else {
         ErrorC(3);
     }
@@ -536,6 +543,7 @@ void BlackKing(char board[8][8], char b[7])
         board[y1][x1] = ' ';
         board[y2][x2] = 'k';
         Show(board);
+        bk_move++;
     } else {
         ErrorC(3);
     }
@@ -592,6 +600,12 @@ void WhiteRook(char board[8][8], char w[7])
         board[y1][x1] = ' ';
         board[y2][x2] = 'R';
         Show(board);
+        if(x1==0&&y1==0){
+            wra_move++;
+        }
+        if(x1==7&&y1==0){
+            wrh_move++;
+        }
     } else {
         ErrorC(3);
     }
@@ -649,6 +663,12 @@ void BlackRook(char board[8][8], char b[7])
         board[y1][x1] = ' ';
         board[y2][x2] = 'r';
         Show(board);
+        if(x1==0&&y1==7){
+            bra_move++;
+        }
+        if(x1==7&&y1==7){
+            brh_move++;
+        }
     } else {
         ErrorC(3);
     }
@@ -982,6 +1002,131 @@ void BlackQueen(char board[8][8], char b[7])
         Show(board);
     } else {
         Error();
+    }
+}
+
+void WhiteRoque(char board[8][8],char w[7]){
+    char mas[8][8];
+    int kx=0;
+    int ky=0;
+    for(int i=0;i<8;i++){
+        for(int j=0;j<8;j++){
+            mas[i][j]=board[i][j];
+            if(board[i][j]=='K'){
+                kx=j;
+                ky=i;
+            }
+        }
+    }
+    if(kx!=4&&ky!=0){
+        ErrorC(3);
+    }
+    if(wk_move!=0){
+        ErrorC(3);
+    }
+    if(w[1]=='-'&&w[2]=='0'&&(w[3]=='\0'||w[3]=='#')){
+        if(wrh_move!=0){
+            ErrorC(3);
+        }
+        if(board[ky][kx+1]!=' '||board[ky][kx+2]!=' '){
+            ErrorC(3);
+        }
+        if(board[ky][kx+3]!='R'){
+            ErrorC(3);
+        }
+        mas[ky][kx+1]='K';
+        mas[ky][kx+2]='K';
+        if(CheckW(mas)){
+            ErrorC(3);
+        }
+        board[ky][kx]=' ';
+        board[ky][kx+2]='K';
+        board[ky][kx+1]='R';
+        board[ky][kx+3]=' ';
+        Show(board);
+    }
+    if(w[1]=='-'&&w[2]=='0'&&w[3]=='-'&&w[4]=='0'&&(w[5]=='\0'||w[5]=='#')){
+        if(wra_move!=0){
+            ErrorC(3);
+        }
+        if(board[ky][kx-1]!=' '||board[ky][kx-2]!=' '||board[ky][kx-3]!=' '){
+            ErrorC(3);
+        }
+        if(board[ky][kx-4]!='R'){
+            ErrorC(3);
+        }
+        mas[ky][kx-1]='K';
+        mas[ky][kx-2]='K';
+        if(CheckW(mas)){
+            ErrorC(3);
+        }
+        board[ky][kx]=' ';
+        board[ky][kx-2]='K';
+        board[ky][kx-1]='R';
+        board[ky][kx-4]=' ';
+        Show(board);
+    }
+}
+void BlackRoque(char board[8][8],char b[7]){
+    char mas[8][8];
+    int kx=0;
+    int ky=0;
+    for(int i=0;i<8;i++){
+        for(int j=0;j<8;j++){
+            mas[i][j]=board[i][j];
+            if(board[i][j]=='k'){
+                kx=j;
+                ky=i;
+            }
+        }
+    }
+    if(kx!=4&&ky!=7){
+        ErrorC(3);
+    }
+    if(bk_move!=0){
+        ErrorC(3);
+    }
+    if(b[1]=='-'&&b[2]=='0'&&(b[3]=='\0'||b[3]=='#')){
+        if(brh_move!=0){
+            ErrorC(3);
+        }
+        if(board[ky][kx+1]!=' '||board[ky][kx+2]!=' '){
+            ErrorC(3);
+        }
+        if(board[ky][kx+3]!='r'){
+            ErrorC(3);
+        }
+        mas[ky][kx+1]='k';
+        mas[ky][kx+2]='k';
+        if(CheckB(mas)){
+            ErrorC(3);
+        }
+        board[ky][kx]=' ';
+        board[ky][kx+2]='k';
+        board[ky][kx+1]='r';
+        board[ky][kx+3]=' ';
+        Show(board);
+    }
+    if(b[1]=='-'&&b[2]=='0'&&b[3]=='-'&&b[4]=='0'&&(b[5]=='\0'||b[5]=='#')){
+        if(bra_move!=0){
+            ErrorC(3);
+        }
+        if(board[ky][kx-1]!=' '||board[ky][kx-2]!=' '||board[ky][kx-3]!=' '){
+            ErrorC(3);
+        }
+        if(board[ky][kx-4]!='r'){
+            ErrorC(3);
+        }
+        mas[ky][kx-1]='k';
+        mas[ky][kx-2]='k';
+        if(CheckB(mas)){
+            ErrorC(3);
+        }
+        board[ky][kx]=' ';
+        board[ky][kx-2]='k';
+        board[ky][kx-1]='r';
+        board[ky][kx-4]=' ';
+        Show(board);
     }
 }
 
