@@ -3,6 +3,8 @@
 # no temporary files
 *~
 *swp
+#no *.d files
+*.d
 # no *.txt files
 *.txt
 # but track input.txt

@@ -25,6 +25,8 @@ void WhiteKnight(char board[8][8], char w[7]);
 void BlackKnight(char board[8][8], char w[7]);
 void WhiteQueen(char board[8][8], char w[7]);
 void BlackQueen(char board[8][8], char w[7]);
+void WhiteRoque(char board[8][8], char w[7]);
+void BlackRoque(char board[8][8], char b[7]);
 void White(char board[8][8], char w[7]);
 void Black(char board[8][8], char b[7]);
 int WinW(char board[8][8], char w[7], int n);

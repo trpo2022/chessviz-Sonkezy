@@ -74,6 +74,30 @@ CTEST(check, b_true)
     ASSERT_EQUAL(exp, real);
 }
 
+CTEST(movement, white_roque)
+{
+    char board[8][8];
+    Create(board);
+    board[0][5] = ' ';
+    board[0][6] = ' ';
+    char w[7] = {'0', '-', '0', '\0'};
+    WhiteRoque(board, w);
+    ASSERT_EQUAL(board[0][5], 'R');
+    ASSERT_EQUAL(board[0][6], 'K');
+}
+
+CTEST(movement, black_roque)
+{
+    char board[8][8];
+    Create(board);
+    board[7][5] = ' ';
+    board[7][6] = ' ';
+    char b[7] = {'0', '-', '0', '\0'};
+    BlackRoque(board, b);
+    ASSERT_EQUAL(board[7][5], 'r');
+    ASSERT_EQUAL(board[7][6], 'k');
+}
+
 CTEST(movement, white_pawn)
 {
     char board[8][8];
