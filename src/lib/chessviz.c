@@ -1,18 +1,18 @@
 #include <lib/chessviz.h>
 
-extern int w_pass; // En passant for White
-extern int w_x;    // Pawn possition for en passant
-extern int b_pass; // En passant for Black
-extern int b_x;    // Pawn possition for en passant
-extern int wk_move; //Number of white king move for roque
-extern int bk_move; //Number of black king move for roque
-extern int wra_move; //Number of white left rook move for roque
-extern int bra_move; //Number of black left rook move for roque
-extern int wrh_move; //Number of white right rook move for roque
-extern int brh_move; //Number of black right rook move for roque
+extern int w_pass;   // En passant for White
+extern int w_x;      // Pawn possition for en passant
+extern int b_pass;   // En passant for Black
+extern int b_x;      // Pawn possition for en passant
+extern int wk_move;  // Number of white king move for roque
+extern int bk_move;  // Number of black king move for roque
+extern int wra_move; // Number of white left rook move for roque
+extern int bra_move; // Number of black left rook move for roque
+extern int wrh_move; // Number of white right rook move for roque
+extern int brh_move; // Number of black right rook move for roque
 
-char white_piece[6] = {'Q','K','B','N','R','P'};
-char black_piece[6] = {'q','k','b','n','r','p'};
+char white_piece[6] = {'Q', 'K', 'B', 'N', 'R', 'P'};
+char black_piece[6] = {'q', 'k', 'b', 'n', 'r', 'p'};
 
 void Create(char board[8][8])
 {
@@ -326,8 +326,9 @@ void WhitePawn(char board[8][8], char w[7])
 {
     int flag = 0;
     int x1, y1, x2, y2;
-    if (w[1] >= '1' && w[1] <= '8' &&( w[2] == '-' || w[2]=='x' ) && w[3] >= 'a' && w[3] <= 'h'
-        && w[4] >= '1' && w[4] <= '8' && (w[5] == '\0' || w[5] == '#')) {
+    if (w[1] >= '1' && w[1] <= '8' && (w[2] == '-' || w[2] == 'x')
+        && w[3] >= 'a' && w[3] <= 'h' && w[4] >= '1' && w[4] <= '8'
+        && (w[5] == '\0' || w[5] == '#')) {
         x1 = ParseX(w[0]);
         y1 = ParseY(w[1]);
         x2 = ParseX(w[3]);
@@ -335,16 +336,16 @@ void WhitePawn(char board[8][8], char w[7])
     } else {
         flag = 1;
     }
-    int take=0;
-    for(int i=0;i<8;i++){
-    	if(board[y2][x2]==black_piece[i]){
-    	    take=1;
-    	}
+    int take = 0;
+    for (int i = 0; i < 8; i++) {
+        if (board[y2][x2] == black_piece[i]) {
+            take = 1;
+        }
     }
-    if((board[y2][x2]==' '&&w[2]=='-')||(take==1&&w[2]=='x')){
-    	flag=0;
-    }else{
-    	flag=1;
+    if ((board[y2][x2] == ' ' && w[2] == '-') || (take == 1 && w[2] == 'x')) {
+        flag = 0;
+    } else {
+        flag = 1;
     }
     if (board[y1][x1] != 'P' && flag == 0) {
         flag = 1;
@@ -381,8 +382,9 @@ void BlackPawn(char board[8][8], char b[7])
 {
     int flag = 0;
     int x1, y1, x2, y2;
-    if (b[1] >= '1' && b[1] <= '8' && ( b[2] == '-' || b[2]=='x' ) && b[3] >= 'a' && b[3] <= 'h'
-        && b[4] >= '1' && b[4] <= '8' && (b[5] == '\0' || b[5] == '#')) {
+    if (b[1] >= '1' && b[1] <= '8' && (b[2] == '-' || b[2] == 'x')
+        && b[3] >= 'a' && b[3] <= 'h' && b[4] >= '1' && b[4] <= '8'
+        && (b[5] == '\0' || b[5] == '#')) {
         x1 = ParseX(b[0]);
         y1 = ParseY(b[1]);
         x2 = ParseX(b[3]);
@@ -391,17 +393,17 @@ void BlackPawn(char board[8][8], char b[7])
     } else {
         flag = 1;
     }
-    
-    int take=0;
-    for(int i=0;i<8;i++){
-    	if(board[y2][x2]==white_piece[i]){
-    	    take=1;
-    	}
+
+    int take = 0;
+    for (int i = 0; i < 8; i++) {
+        if (board[y2][x2] == white_piece[i]) {
+            take = 1;
+        }
     }
-    if((board[y2][x2]==' '&&b[2]=='-')||(take==1&&b[2]=='x')){
-    	flag=0;
-    }else{
-    	flag=1;
+    if ((board[y2][x2] == ' ' && b[2] == '-') || (take == 1 && b[2] == 'x')) {
+        flag = 0;
+    } else {
+        flag = 1;
     }
     if (board[y1][x1] != 'p' && flag == 0) {
         flag = 1;
@@ -438,9 +440,9 @@ void WhiteKing(char board[8][8], char w[7])
 {
     int flag = 0;
     int x1, y1, x2, y2;
-    if (w[1] >= 'a' && w[1] <= 'h' && w[2] >= '1' && w[2] <= '8' && ( w[3] == '-' || w[3]=='x' )
-        && w[4] >= 'a' && w[4] <= 'h' && w[5] >= '1' && w[5] <= '8'
-        && (w[6] == '\0' || w[6] == '#')) {
+    if (w[1] >= 'a' && w[1] <= 'h' && w[2] >= '1' && w[2] <= '8'
+        && (w[3] == '-' || w[3] == 'x') && w[4] >= 'a' && w[4] <= 'h'
+        && w[5] >= '1' && w[5] <= '8' && (w[6] == '\0' || w[6] == '#')) {
         x1 = ParseX(w[1]);
         y1 = ParseY(w[2]);
         x2 = ParseX(w[4]);
@@ -448,17 +450,17 @@ void WhiteKing(char board[8][8], char w[7])
     } else {
         flag = 1;
     }
-    
-    int take=0;
-    for(int i=0;i<8;i++){
-    	if(board[y2][x2]==black_piece[i]){
-    	    take=1;
-    	}
+
+    int take = 0;
+    for (int i = 0; i < 8; i++) {
+        if (board[y2][x2] == black_piece[i]) {
+            take = 1;
+        }
     }
-    if((board[y2][x2]==' '&&w[3]=='-')||(take==1&&w[3]=='x')){
-    	flag=0;
-    }else{
-    	flag=1;
+    if ((board[y2][x2] == ' ' && w[3] == '-') || (take == 1 && w[3] == 'x')) {
+        flag = 0;
+    } else {
+        flag = 1;
     }
     if (board[y1][x1] != 'K') {
         flag = 1;
@@ -495,9 +497,9 @@ void BlackKing(char board[8][8], char b[7])
 {
     int flag = 0;
     int x1, y1, x2, y2;
-    if (b[1] >= 'a' && b[1] <= 'h' && b[2] >= '1' && b[2] <= '8' && ( b[3] == '-' || b[3]=='x' )
-        && b[4] >= 'a' && b[4] <= 'h' && b[5] >= '1' && b[5] <= '8'
-        && (b[6] == '\0' || b[6] == '#')) {
+    if (b[1] >= 'a' && b[1] <= 'h' && b[2] >= '1' && b[2] <= '8'
+        && (b[3] == '-' || b[3] == 'x') && b[4] >= 'a' && b[4] <= 'h'
+        && b[5] >= '1' && b[5] <= '8' && (b[6] == '\0' || b[6] == '#')) {
         x1 = ParseX(b[1]);
         y1 = ParseY(b[2]);
         x2 = ParseX(b[4]);
@@ -505,17 +507,17 @@ void BlackKing(char board[8][8], char b[7])
     } else {
         flag = 1;
     }
-    
-    int take=0;
-    for(int i=0;i<8;i++){
-    	if(board[y2][x2]==white_piece[i]){
-    	    take=1;
-    	}
+
+    int take = 0;
+    for (int i = 0; i < 8; i++) {
+        if (board[y2][x2] == white_piece[i]) {
+            take = 1;
+        }
     }
-    if((board[y2][x2]==' '&&b[3]=='-')||(take==1&&b[3]=='x')){
-    	flag=0;
-    }else{
-    	flag=1;
+    if ((board[y2][x2] == ' ' && b[3] == '-') || (take == 1 && b[3] == 'x')) {
+        flag = 0;
+    } else {
+        flag = 1;
     }
     if (board[y1][x1] != 'k') {
         flag = 1;
@@ -553,9 +555,9 @@ void WhiteRook(char board[8][8], char w[7])
 {
     int flag = 0;
     int x1, y1, x2, y2;
-    if (w[1] >= 'a' && w[1] <= 'h' && w[2] >= '1' && w[2] <= '8' && ( w[3] == '-' || w[3]=='x' )
-        && w[4] >= 'a' && w[4] <= 'h' && w[5] >= '1' && w[5] <= '8'
-        && (w[6] == '\0' || w[6] == '#')) {
+    if (w[1] >= 'a' && w[1] <= 'h' && w[2] >= '1' && w[2] <= '8'
+        && (w[3] == '-' || w[3] == 'x') && w[4] >= 'a' && w[4] <= 'h'
+        && w[5] >= '1' && w[5] <= '8' && (w[6] == '\0' || w[6] == '#')) {
         x1 = ParseX(w[1]);
         y1 = ParseY(w[2]);
         x2 = ParseX(w[4]);
@@ -563,17 +565,17 @@ void WhiteRook(char board[8][8], char w[7])
     } else {
         flag = 1;
     }
-    
-    int take=0;
-    for(int i=0;i<8;i++){
-    	if(board[y2][x2]==black_piece[i]){
-    	    take=1;
-    	}
+
+    int take = 0;
+    for (int i = 0; i < 8; i++) {
+        if (board[y2][x2] == black_piece[i]) {
+            take = 1;
+        }
     }
-    if((board[y2][x2]==' '&&w[3]=='-')||(take==1&&w[3]=='x')){
-    	flag=0;
-    }else{
-    	flag=1;
+    if ((board[y2][x2] == ' ' && w[3] == '-') || (take == 1 && w[3] == 'x')) {
+        flag = 0;
+    } else {
+        flag = 1;
     }
     if (board[y1][x1] != 'R') {
         flag = 1;
@@ -600,10 +602,10 @@ void WhiteRook(char board[8][8], char w[7])
         board[y1][x1] = ' ';
         board[y2][x2] = 'R';
         Show(board);
-        if(x1==0&&y1==0){
+        if (x1 == 0 && y1 == 0) {
             wra_move++;
         }
-        if(x1==7&&y1==0){
+        if (x1 == 7 && y1 == 0) {
             wrh_move++;
         }
     } else {
@@ -614,9 +616,9 @@ void BlackRook(char board[8][8], char b[7])
 {
     int flag = 0;
     int x1, y1, x2, y2;
-    if (b[1] >= 'a' && b[1] <= 'h' && b[2] >= '1' && b[2] <= '8' && ( b[3] == '-' || b[3]=='x' )
-        && b[4] >= 'a' && b[4] <= 'h' && b[5] >= '1' && b[5] <= '8'
-        && (b[6] == '\0' || b[6] == '#')) {
+    if (b[1] >= 'a' && b[1] <= 'h' && b[2] >= '1' && b[2] <= '8'
+        && (b[3] == '-' || b[3] == 'x') && b[4] >= 'a' && b[4] <= 'h'
+        && b[5] >= '1' && b[5] <= '8' && (b[6] == '\0' || b[6] == '#')) {
         x1 = ParseX(b[1]);
         y1 = ParseY(b[2]);
         x2 = ParseX(b[4]);
@@ -627,16 +629,16 @@ void BlackRook(char board[8][8], char b[7])
     if (board[y1][x1] != 'r') {
         flag = 1;
     }
-    int take=0;
-    for(int i=0;i<8;i++){
-    	if(board[y2][x2]==white_piece[i]){
-    	    take=1;
-    	}
+    int take = 0;
+    for (int i = 0; i < 8; i++) {
+        if (board[y2][x2] == white_piece[i]) {
+            take = 1;
+        }
     }
-    if((board[y2][x2]==' '&&b[3]=='-')||(take==1&&b[3]=='x')){
-    	flag=0;
-    }else{
-    	flag=1;
+    if ((board[y2][x2] == ' ' && b[3] == '-') || (take == 1 && b[3] == 'x')) {
+        flag = 0;
+    } else {
+        flag = 1;
     }
     if (board[y1][x1] != 'r') {
         flag = 1;
@@ -663,10 +665,10 @@ void BlackRook(char board[8][8], char b[7])
         board[y1][x1] = ' ';
         board[y2][x2] = 'r';
         Show(board);
-        if(x1==0&&y1==7){
+        if (x1 == 0 && y1 == 7) {
             bra_move++;
         }
-        if(x1==7&&y1==7){
+        if (x1 == 7 && y1 == 7) {
             brh_move++;
         }
     } else {
@@ -678,9 +680,9 @@ void WhiteBishop(char board[8][8], char w[7])
 {
     int flag = 0;
     int x1, y1, x2, y2;
-    if (w[1] >= 'a' && w[1] <= 'h' && w[2] >= '1' && w[2] <= '8' && ( w[3] == '-' || w[3]=='x' )
-        && w[4] >= 'a' && w[4] <= 'h' && w[5] >= '1' && w[5] <= '8'
-        && (w[6] == '\0' || w[6] == '#')) {
+    if (w[1] >= 'a' && w[1] <= 'h' && w[2] >= '1' && w[2] <= '8'
+        && (w[3] == '-' || w[3] == 'x') && w[4] >= 'a' && w[4] <= 'h'
+        && w[5] >= '1' && w[5] <= '8' && (w[6] == '\0' || w[6] == '#')) {
         x1 = ParseX(w[1]);
         y1 = ParseY(w[2]);
         x2 = ParseX(w[4]);
@@ -691,16 +693,16 @@ void WhiteBishop(char board[8][8], char w[7])
     if (board[y1][x1] != 'B') {
         flag = 1;
     }
-    int take=0;
-    for(int i=0;i<8;i++){
-    	if(board[y2][x2]==black_piece[i]){
-    	    take=1;
-    	}
+    int take = 0;
+    for (int i = 0; i < 8; i++) {
+        if (board[y2][x2] == black_piece[i]) {
+            take = 1;
+        }
     }
-    if((board[y2][x2]==' '&&w[3]=='-')||(take==1&&w[3]=='x')){
-    	flag=0;
-    }else{
-    	flag=1;
+    if ((board[y2][x2] == ' ' && w[3] == '-') || (take == 1 && w[3] == 'x')) {
+        flag = 0;
+    } else {
+        flag = 1;
     }
     if (board[y1][x1] != 'B') {
         flag = 1;
@@ -735,9 +737,9 @@ void BlackBishop(char board[8][8], char b[7])
 {
     int flag = 0;
     int x1, y1, x2, y2;
-    if (b[1] >= 'a' && b[1] <= 'h' && b[2] >= '1' && b[2] <= '8' && ( b[3] == '-' || b[3]=='x' )
-        && b[4] >= 'a' && b[4] <= 'h' && b[5] >= '1' && b[5] <= '8'
-        && (b[6] == '\0' || b[6] == '#')) {
+    if (b[1] >= 'a' && b[1] <= 'h' && b[2] >= '1' && b[2] <= '8'
+        && (b[3] == '-' || b[3] == 'x') && b[4] >= 'a' && b[4] <= 'h'
+        && b[5] >= '1' && b[5] <= '8' && (b[6] == '\0' || b[6] == '#')) {
         x1 = ParseX(b[1]);
         y1 = ParseY(b[2]);
         x2 = ParseX(b[4]);
@@ -745,17 +747,17 @@ void BlackBishop(char board[8][8], char b[7])
     } else {
         flag = 1;
     }
-    
-    int take=0;
-    for(int i=0;i<8;i++){
-    	if(board[y2][x2]==white_piece[i]){
-    	    take=1;
-    	}
+
+    int take = 0;
+    for (int i = 0; i < 8; i++) {
+        if (board[y2][x2] == white_piece[i]) {
+            take = 1;
+        }
     }
-    if((board[y2][x2]==' '&&b[3]=='-')||(take==1&&b[3]=='x')){
-    	flag=0;
-    }else{
-    	flag=1;
+    if ((board[y2][x2] == ' ' && b[3] == '-') || (take == 1 && b[3] == 'x')) {
+        flag = 0;
+    } else {
+        flag = 1;
     }
     if (board[y1][x1] != 'b') {
         flag = 1;
@@ -791,9 +793,9 @@ void WhiteKnight(char board[8][8], char w[7])
 {
     int flag = 0;
     int x1, y1, x2, y2;
-    if (w[1] >= 'a' && w[1] <= 'h' && w[2] >= '1' && w[2] <= '8' && ( w[3] == '-' || w[3]=='x' )
-        && w[4] >= 'a' && w[4] <= 'h' && w[5] >= '1' && w[5] <= '8'
-        && (w[6] == '\0' || w[6] == '#')) {
+    if (w[1] >= 'a' && w[1] <= 'h' && w[2] >= '1' && w[2] <= '8'
+        && (w[3] == '-' || w[3] == 'x') && w[4] >= 'a' && w[4] <= 'h'
+        && w[5] >= '1' && w[5] <= '8' && (w[6] == '\0' || w[6] == '#')) {
         x1 = ParseX(w[1]);
         y1 = ParseY(w[2]);
         x2 = ParseX(w[4]);
@@ -801,16 +803,16 @@ void WhiteKnight(char board[8][8], char w[7])
     } else {
         flag = 1;
     }
-    int take=0;
-    for(int i=0;i<8;i++){
-    	if(board[y2][x2]==black_piece[i]){
-    	    take=1;
-    	}
+    int take = 0;
+    for (int i = 0; i < 8; i++) {
+        if (board[y2][x2] == black_piece[i]) {
+            take = 1;
+        }
     }
-    if((board[y2][x2]==' '&&w[3]=='-')||(take==1&&w[3]=='x')){
-    	flag=0;
-    }else{
-    	flag=1;
+    if ((board[y2][x2] == ' ' && w[3] == '-') || (take == 1 && w[3] == 'x')) {
+        flag = 0;
+    } else {
+        flag = 1;
     }
     if (board[y1][x1] != 'N') {
         flag = 1;
@@ -845,9 +847,9 @@ void BlackKnight(char board[8][8], char b[7])
 {
     int flag = 0;
     int x1, y1, x2, y2;
-    if (b[1] >= 'a' && b[1] <= 'h' && b[2] >= '1' && b[2] <= '8' && ( b[3] == '-' || b[3]=='x' )
-        && b[4] >= 'a' && b[4] <= 'h' && b[5] >= '1' && b[5] <= '8'
-        && (b[6] == '\0' || b[6] == '#')) {
+    if (b[1] >= 'a' && b[1] <= 'h' && b[2] >= '1' && b[2] <= '8'
+        && (b[3] == '-' || b[3] == 'x') && b[4] >= 'a' && b[4] <= 'h'
+        && b[5] >= '1' && b[5] <= '8' && (b[6] == '\0' || b[6] == '#')) {
         x1 = ParseX(b[1]);
         y1 = ParseY(b[2]);
         x2 = ParseX(b[4]);
@@ -855,16 +857,16 @@ void BlackKnight(char board[8][8], char b[7])
     } else {
         flag = 1;
     }
-    int take=0;
-    for(int i=0;i<8;i++){
-    	if(board[y2][x2]==white_piece[i]){
-    	    take=1;
-    	}
+    int take = 0;
+    for (int i = 0; i < 8; i++) {
+        if (board[y2][x2] == white_piece[i]) {
+            take = 1;
+        }
     }
-    if((board[y2][x2]==' '&&b[3]=='-')||(take==1&&b[3]=='x')){
-    	flag=0;
-    }else{
-    	flag=1;
+    if ((board[y2][x2] == ' ' && b[3] == '-') || (take == 1 && b[3] == 'x')) {
+        flag = 0;
+    } else {
+        flag = 1;
     }
     if (board[y1][x1] != 'n') {
         flag = 1;
@@ -900,9 +902,9 @@ void WhiteQueen(char board[8][8], char w[7])
 {
     int flag = 0;
     int x1, y1, x2, y2;
-    if (w[1] >= 'a' && w[1] <= 'h' && w[2] >= '1' && w[2] <= '8' && ( w[3] == '-' || w[3]=='x' )
-        && w[4] >= 'a' && w[4] <= 'h' && w[5] >= '1' && w[5] <= '8'
-        && (w[6] == '\0' || w[6] == '#')) {
+    if (w[1] >= 'a' && w[1] <= 'h' && w[2] >= '1' && w[2] <= '8'
+        && (w[3] == '-' || w[3] == 'x') && w[4] >= 'a' && w[4] <= 'h'
+        && w[5] >= '1' && w[5] <= '8' && (w[6] == '\0' || w[6] == '#')) {
         x1 = ParseX(w[1]);
         y1 = ParseY(w[2]);
         x2 = ParseX(w[4]);
@@ -910,16 +912,16 @@ void WhiteQueen(char board[8][8], char w[7])
     } else {
         flag = 1;
     }
-    int take=0;
-    for(int i=0;i<8;i++){
-    	if(board[y2][x2]==black_piece[i]){
-    	    take=1;
-    	}
+    int take = 0;
+    for (int i = 0; i < 8; i++) {
+        if (board[y2][x2] == black_piece[i]) {
+            take = 1;
+        }
     }
-    if((board[y2][x2]==' '&&w[3]=='-')||(take==1&&w[3]=='x')){
-    	flag=0;
-    }else{
-    	flag=1;
+    if ((board[y2][x2] == ' ' && w[3] == '-') || (take == 1 && w[3] == 'x')) {
+        flag = 0;
+    } else {
+        flag = 1;
     }
     if (board[y1][x1] != 'Q') {
         flag = 1;
@@ -954,9 +956,9 @@ void BlackQueen(char board[8][8], char b[7])
 {
     int flag = 0;
     int x1, y1, x2, y2;
-    if (b[1] >= 'a' && b[1] <= 'h' && b[2] >= '1' && b[2] <= '8' && ( b[3] == '-' || b[3]=='x' )
-        && b[4] >= 'a' && b[4] <= 'h' && b[5] >= '1' && b[5] <= '8'
-        && (b[6] == '\0' || b[6] == '#')) {
+    if (b[1] >= 'a' && b[1] <= 'h' && b[2] >= '1' && b[2] <= '8'
+        && (b[3] == '-' || b[3] == 'x') && b[4] >= 'a' && b[4] <= 'h'
+        && b[5] >= '1' && b[5] <= '8' && (b[6] == '\0' || b[6] == '#')) {
         x1 = ParseX(b[1]);
         y1 = ParseY(b[2]);
         x2 = ParseX(b[4]);
@@ -964,16 +966,16 @@ void BlackQueen(char board[8][8], char b[7])
     } else {
         flag = 1;
     }
-    int take=0;
-    for(int i=0;i<8;i++){
-    	if(board[y2][x2]==white_piece[i]){
-    	    take=1;
-    	}
+    int take = 0;
+    for (int i = 0; i < 8; i++) {
+        if (board[y2][x2] == white_piece[i]) {
+            take = 1;
+        }
     }
-    if((board[y2][x2]==' '&&b[3]=='-')||(take==1&&b[3]=='x')){
-    	flag=0;
-    }else{
-    	flag=1;
+    if ((board[y2][x2] == ' ' && b[3] == '-') || (take == 1 && b[3] == 'x')) {
+        flag = 0;
+    } else {
+        flag = 1;
     }
     if (board[y1][x1] != 'q') {
         flag = 1;
@@ -1005,127 +1007,133 @@ void BlackQueen(char board[8][8], char b[7])
     }
 }
 
-void WhiteRoque(char board[8][8],char w[7]){
+void WhiteRoque(char board[8][8], char w[7])
+{
     char mas[8][8];
-    int kx=0;
-    int ky=0;
-    for(int i=0;i<8;i++){
-        for(int j=0;j<8;j++){
-            mas[i][j]=board[i][j];
-            if(board[i][j]=='K'){
-                kx=j;
-                ky=i;
+    int kx = 0;
+    int ky = 0;
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            mas[i][j] = board[i][j];
+            if (board[i][j] == 'K') {
+                kx = j;
+                ky = i;
             }
         }
     }
-    if(kx!=4&&ky!=0){
+    if (kx != 4 && ky != 0) {
         ErrorC(3);
     }
-    if(wk_move!=0){
+    if (wk_move != 0) {
         ErrorC(3);
     }
-    if(w[1]=='-'&&w[2]=='0'&&(w[3]=='\0'||w[3]=='#')){
-        if(wrh_move!=0){
+    if (w[1] == '-' && w[2] == '0' && (w[3] == '\0' || w[3] == '#')) {
+        if (wrh_move != 0) {
             ErrorC(3);
         }
-        if(board[ky][kx+1]!=' '||board[ky][kx+2]!=' '){
+        if (board[ky][kx + 1] != ' ' || board[ky][kx + 2] != ' ') {
             ErrorC(3);
         }
-        if(board[ky][kx+3]!='R'){
+        if (board[ky][kx + 3] != 'R') {
             ErrorC(3);
         }
-        mas[ky][kx+1]='K';
-        mas[ky][kx+2]='K';
-        if(CheckW(mas)){
+        mas[ky][kx + 1] = 'K';
+        mas[ky][kx + 2] = 'K';
+        if (CheckW(mas)) {
             ErrorC(3);
         }
-        board[ky][kx]=' ';
-        board[ky][kx+2]='K';
-        board[ky][kx+1]='R';
-        board[ky][kx+3]=' ';
+        board[ky][kx] = ' ';
+        board[ky][kx + 2] = 'K';
+        board[ky][kx + 1] = 'R';
+        board[ky][kx + 3] = ' ';
         Show(board);
     }
-    if(w[1]=='-'&&w[2]=='0'&&w[3]=='-'&&w[4]=='0'&&(w[5]=='\0'||w[5]=='#')){
-        if(wra_move!=0){
+    if (w[1] == '-' && w[2] == '0' && w[3] == '-' && w[4] == '0'
+        && (w[5] == '\0' || w[5] == '#')) {
+        if (wra_move != 0) {
             ErrorC(3);
         }
-        if(board[ky][kx-1]!=' '||board[ky][kx-2]!=' '||board[ky][kx-3]!=' '){
+        if (board[ky][kx - 1] != ' ' || board[ky][kx - 2] != ' '
+            || board[ky][kx - 3] != ' ') {
             ErrorC(3);
         }
-        if(board[ky][kx-4]!='R'){
+        if (board[ky][kx - 4] != 'R') {
             ErrorC(3);
         }
-        mas[ky][kx-1]='K';
-        mas[ky][kx-2]='K';
-        if(CheckW(mas)){
+        mas[ky][kx - 1] = 'K';
+        mas[ky][kx - 2] = 'K';
+        if (CheckW(mas)) {
             ErrorC(3);
         }
-        board[ky][kx]=' ';
-        board[ky][kx-2]='K';
-        board[ky][kx-1]='R';
-        board[ky][kx-4]=' ';
+        board[ky][kx] = ' ';
+        board[ky][kx - 2] = 'K';
+        board[ky][kx - 1] = 'R';
+        board[ky][kx - 4] = ' ';
         Show(board);
     }
 }
-void BlackRoque(char board[8][8],char b[7]){
+void BlackRoque(char board[8][8], char b[7])
+{
     char mas[8][8];
-    int kx=0;
-    int ky=0;
-    for(int i=0;i<8;i++){
-        for(int j=0;j<8;j++){
-            mas[i][j]=board[i][j];
-            if(board[i][j]=='k'){
-                kx=j;
-                ky=i;
+    int kx = 0;
+    int ky = 0;
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            mas[i][j] = board[i][j];
+            if (board[i][j] == 'k') {
+                kx = j;
+                ky = i;
             }
         }
     }
-    if(kx!=4&&ky!=7){
+    if (kx != 4 && ky != 7) {
         ErrorC(3);
     }
-    if(bk_move!=0){
+    if (bk_move != 0) {
         ErrorC(3);
     }
-    if(b[1]=='-'&&b[2]=='0'&&(b[3]=='\0'||b[3]=='#')){
-        if(brh_move!=0){
+    if (b[1] == '-' && b[2] == '0' && (b[3] == '\0' || b[3] == '#')) {
+        if (brh_move != 0) {
             ErrorC(3);
         }
-        if(board[ky][kx+1]!=' '||board[ky][kx+2]!=' '){
+        if (board[ky][kx + 1] != ' ' || board[ky][kx + 2] != ' ') {
             ErrorC(3);
         }
-        if(board[ky][kx+3]!='r'){
+        if (board[ky][kx + 3] != 'r') {
             ErrorC(3);
         }
-        mas[ky][kx+1]='k';
-        mas[ky][kx+2]='k';
-        if(CheckB(mas)){
+        mas[ky][kx + 1] = 'k';
+        mas[ky][kx + 2] = 'k';
+        if (CheckB(mas)) {
             ErrorC(3);
         }
-        board[ky][kx]=' ';
-        board[ky][kx+2]='k';
-        board[ky][kx+1]='r';
-        board[ky][kx+3]=' ';
+        board[ky][kx] = ' ';
+        board[ky][kx + 2] = 'k';
+        board[ky][kx + 1] = 'r';
+        board[ky][kx + 3] = ' ';
         Show(board);
     }
-    if(b[1]=='-'&&b[2]=='0'&&b[3]=='-'&&b[4]=='0'&&(b[5]=='\0'||b[5]=='#')){
-        if(bra_move!=0){
+    if (b[1] == '-' && b[2] == '0' && b[3] == '-' && b[4] == '0'
+        && (b[5] == '\0' || b[5] == '#')) {
+        if (bra_move != 0) {
             ErrorC(3);
         }
-        if(board[ky][kx-1]!=' '||board[ky][kx-2]!=' '||board[ky][kx-3]!=' '){
+        if (board[ky][kx - 1] != ' ' || board[ky][kx - 2] != ' '
+            || board[ky][kx - 3] != ' ') {
             ErrorC(3);
         }
-        if(board[ky][kx-4]!='r'){
+        if (board[ky][kx - 4] != 'r') {
             ErrorC(3);
         }
-        mas[ky][kx-1]='k';
-        mas[ky][kx-2]='k';
-        if(CheckB(mas)){
+        mas[ky][kx - 1] = 'k';
+        mas[ky][kx - 2] = 'k';
+        if (CheckB(mas)) {
             ErrorC(3);
         }
-        board[ky][kx]=' ';
-        board[ky][kx-2]='k';
-        board[ky][kx-1]='r';
-        board[ky][kx-4]=' ';
+        board[ky][kx] = ' ';
+        board[ky][kx - 2] = 'k';
+        board[ky][kx - 1] = 'r';
+        board[ky][kx - 4] = ' ';
         Show(board);
     }
 }

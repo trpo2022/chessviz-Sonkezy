@@ -226,5 +226,3 @@ CTEST(movement, black_bishop)
     ASSERT_EQUAL(board[7][5], ' ');
 }
 
-
-
